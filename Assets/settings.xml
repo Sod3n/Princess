@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ScreenWidth>0</ScreenWidth>
+  <ScreenHeight>0</ScreenHeight>
+  <FullScreenMode>ExclusiveFullScreen</FullScreenMode>
+  <QualiteLevel>0</QualiteLevel>
+  <ControllsType>None</ControllsType>
+  <MouseInverseX>false</MouseInverseX>
+  <MouseInverseY>false</MouseInverseY>
+  <KeyboardControlls>
+    <MoveLeftKey>A</MoveLeftKey>
+    <MoveRightKey>D</MoveRightKey>
+    <MoveUpKey>T</MoveUpKey>
+    <MoveDownKey>S</MoveDownKey>
+    <AttackKey>Mouse0</AttackKey>
+    <InteractKey>E</InteractKey>
+    <FlipKey>Mouse1</FlipKey>
+    <SkillsKeys>
+      <KeyCode>Alpha1</KeyCode>
+      <KeyCode>Alpha2</KeyCode>
+      <KeyCode>Alpha3</KeyCode>
+      <KeyCode>Alpha4</KeyCode>
+    </SkillsKeys>
+    <Skills>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+    </Skills>
+    <OpenMenuKey>Escape</OpenMenuKey>
+  </KeyboardControlls>
+</Settings>
