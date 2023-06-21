@@ -27,15 +27,6 @@ namespace Assets.Project2DExample.World.Components
             set { _controllsSelector = value; }
         }
 
-        private List<IEntityComponent> _entityComponents;
-
-        public List<IEntityComponent> EntityComponents 
-        {
-            get {  return _entityComponents; }
-            set { _entityComponents = value; }
-        }
-        
-
         [SerializeField] private Characteristics _characteristics;
         public Characteristics Characteristics
         {
@@ -66,11 +57,6 @@ namespace Assets.Project2DExample.World.Components
                 _uniqueEffects = value;
             }
         }
-        [SerializeField] private Rigidbody2DMover _rigidbody2DMover;
-        public Rigidbody2DMover Rigidbody2DMover
-        {
-            get { return _rigidbody2DMover; }
-        }
         [SerializeField] private Animator _animator;
         public Animator Animator
         {
@@ -81,21 +67,22 @@ namespace Assets.Project2DExample.World.Components
         {
             get { return _rigidbody2D; }
         }
-        [SerializeField] private AttackMaker _attackMaker;
-        public AttackMaker AttackMaker
+
+        [SerializeField] private List<EntityComponent> _entityComponents;
+
+        public List<EntityComponent> EntityComponents
         {
-            get { return _attackMaker; }
+            get { return _entityComponents; }
+            set { _entityComponents = value; }
         }
-        [SerializeField] private Flipper _flipper;
-        public Flipper Flipper
+
+        public T GetEntityComponent<T>() where T : EntityComponent
         {
-            get { return _flipper; }
-        }
-        [SerializeField] EntityInformation _entityInformation;
-        public EntityInformation EntityInformation
-        {
-            get { return _entityInformation; }
-            set { _entityInformation = value; }
+            foreach (var component in _entityComponents)
+            {
+                if (component is T) return (T)component;
+            }
+            return null;
         }
         #endregion
 
@@ -105,20 +92,21 @@ namespace Assets.Project2DExample.World.Components
 
         public delegate void OnDamageReceiveEventHandler(ref Damage damage);
         public event OnDamageReceiveEventHandler OnDamageReceive = delegate { };
+        public event Action OnDamageReceived = delegate { };
         public event Action OnFatalDamageReceive = delegate { };
         public event Action OnDie = delegate { };
 
-        float CurrentHPStartLocalScaleX = 0;
+        
         public virtual void ReceiveDamage(Damage damage)
         {
             OnDamageReceive.Invoke(ref damage);
             if(0 != damage.Value)
             {
-                Characteristics.HP -= damage.Value;
-                if (Characteristics.HP < 0)
+                Characteristics.TotalHP -= damage.Value;
+                if (Characteristics.TotalHP < 0)
                 {
                     OnFatalDamageReceive.Invoke();
-                    if (Characteristics.HP < 0)
+                    if (Characteristics.TotalHP < 0)
                     {
                         Die();
                     }
@@ -127,8 +115,9 @@ namespace Assets.Project2DExample.World.Components
                 Rigidbody2D.AddForce(damage.PushVector);
                 AddUniqueEffectOnTime(new EffectImmortality(this), Characteristics.ImmortalTimeAfterGetDamage);
             }
-            _entityInformation.CurrentHP.localScale = new Vector2(Characteristics.HP / Characteristics.MaxHP * CurrentHPStartLocalScaleX, _entityInformation.CurrentHP.localScale.y);
+            OnDamageReceived.Invoke();
         }
+
         protected virtual void Die()
         {
             _animator.SetBool("Died", true);
@@ -138,7 +127,6 @@ namespace Assets.Project2DExample.World.Components
         protected virtual void Start()
         {
             _characteristics.Entity = this;
-            CurrentHPStartLocalScaleX = _entityInformation.CurrentHP.localScale.x;
         }
         #endregion
 

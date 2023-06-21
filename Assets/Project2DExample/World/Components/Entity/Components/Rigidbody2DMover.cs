@@ -8,10 +8,8 @@ using UnityEngine;
 
 namespace Assets.Project2DExample.World.Components
 {
-    public class Rigidbody2DMover : MonoBehaviour
+    public class Rigidbody2DMover : EntityComponent
     {
-        [SerializeField] private Entity _entity;
-
         private Vector2 _moveDirection = new Vector2();
         public Vector2 MoveDirection
         {
@@ -26,7 +24,7 @@ namespace Assets.Project2DExample.World.Components
         bool _isMoveOnLastFrame = false;
         public void StopMove()
         {
-            _entity.Rigidbody2D.velocity = Vector2.zero;
+            Entity.Rigidbody2D.velocity = Vector2.zero;
             _isMoveOnLastFrame = false;
         }
         protected virtual void FixedUpdate()
@@ -35,7 +33,7 @@ namespace Assets.Project2DExample.World.Components
             if (_moveVector.sqrMagnitude > 0)
             {
                 _isMoveOnLastFrame = true;
-                _entity.Rigidbody2D.velocity = _moveVector; //At the end _rigidbody.MovePosition() make me sad. It also just change velocity and continue do it if we stop invoke it, for "smooth" stop xD
+                Entity.Rigidbody2D.velocity = _moveVector; //At the end _rigidbody.MovePosition() make me sad. It also just change velocity and continue do it if we stop invoke it, for "smooth" stop xD
             }
             else if (_isMoveOnLastFrame)
             {
@@ -44,12 +42,12 @@ namespace Assets.Project2DExample.World.Components
         }
         protected virtual void Update()
         {
-            _moveDirection = new Vector2(_entity.ControllsSelector.Controlls.Horizontal, _entity.ControllsSelector.Controlls.Vertical);
+            _moveDirection = new Vector2(Entity.ControllsSelector.Controlls.Horizontal, Entity.ControllsSelector.Controlls.Vertical);
             _moveDirection.Normalize();
 
-            _moveVector = _moveDirection * _entity.Characteristics.MoveSpeed;//if movespeed will be zero then will think that player stand
-            if (_entity.Animator != null)
-                _entity.Animator.SetInteger("MovementDirection", (int)GetAnimationDirectionAndRot(_moveVector));
+            _moveVector = _moveDirection * Entity.Characteristics.MoveSpeed;//if movespeed will be zero then will think that player stand
+            if (Entity.Animator != null)
+                Entity.Animator.SetInteger("MovementDirection", (int)GetAnimationDirectionAndRot(_moveVector));
         }
 
         private enum _animatorMoveDirection : int
@@ -68,7 +66,7 @@ namespace Assets.Project2DExample.World.Components
         {
             _animatorMoveDirection direction = _animatorMoveDirection.Idle;
             if (moveDirection.sqrMagnitude == 0) return direction;
-            _entity.Rigidbody2D.transform.eulerAngles = new Vector3(0, 0);
+            Entity.Rigidbody2D.transform.eulerAngles = new Vector3(0, 0);
             if (Vector2.Angle(Vector2.up, moveDirection) <= 10f)
             {
                 direction = _animatorMoveDirection.Up;
@@ -91,7 +89,7 @@ namespace Assets.Project2DExample.World.Components
             }
             else
             {
-                _entity.Rigidbody2D.transform.eulerAngles = new Vector3(0, 180); // if not these one, flip and check remain angles
+                Entity.Rigidbody2D.transform.eulerAngles = new Vector3(0, 180); // if not these one, flip and check remain angles
             }
             if (Vector2.Angle(new Vector2(-1, -1), moveDirection) <= 35f)
             {

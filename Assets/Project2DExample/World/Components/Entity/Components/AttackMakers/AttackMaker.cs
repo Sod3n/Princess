@@ -10,9 +10,8 @@ using UnityEngine;
 
 namespace Assets.Project2DExample.World.Components
 {
-    public abstract class AttackMaker : MonoBehaviour
+    public abstract class AttackMaker : EntityComponent
     {
-        [SerializeField] protected Entity _entity;
         [SerializeField] protected List<Attack> _attacks;
 
         protected Vector2 _cursorDirection = new Vector2();
@@ -28,12 +27,16 @@ namespace Assets.Project2DExample.World.Components
         {
             _lastAttackTime = 0;
         }
+        protected virtual void Start()
+        {
+
+        }
         protected virtual void Update()
         {
-            if (_entity.ControllsSelector.Controlls.Attack)
+            if (Entity.ControllsSelector.Controlls.Attack)
             {
-                _cursorDirection = (_entity.ControllsSelector.Controlls.Cursor - (Vector2)_entity.Rigidbody2D.transform.position).normalized;
-                if (_entity.Characteristics.CanAttack)
+                _cursorDirection = (Entity.ControllsSelector.Controlls.Cursor - (Vector2)Entity.Rigidbody2D.transform.position).normalized;
+                if (Entity.Characteristics.CanAttack)
                 {
                     Attack findedAttack = GetNextAttack();
                     if (findedAttack != null)

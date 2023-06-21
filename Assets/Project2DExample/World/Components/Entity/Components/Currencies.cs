@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Assets.Project2DExample.World.Objects
 {
     [Serializable]
-    public class Currencies
+    public class Currencies : EntityComponent
     {
         [SerializeField] int _gold;
         public int Gold

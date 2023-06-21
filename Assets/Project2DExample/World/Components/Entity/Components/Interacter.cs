@@ -8,9 +8,13 @@ using UnityEngine;
 
 namespace Assets.Project2DExample.World.Components
 {
-    public class Interacter : MonoBehaviour
+    public class Interacter : EntityComponent
     {
-        [SerializeField] private Entity _entity;
+        public override Type[] Dependencies { get; set; } =
+        {
+            typeof(Flipper),
+        };
+
         private IInteractable _lastInteractableObjectInZone;
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -22,10 +26,10 @@ namespace Assets.Project2DExample.World.Components
         }
         private void Update()
         {
-            if (_entity.ControllsSelector.Controlls.Interact)
+            if (Entity.ControllsSelector.Controlls.Interact)
             {
                 if(_lastInteractableObjectInZone != null)
-                    _lastInteractableObjectInZone.Interact(_entity);
+                    _lastInteractableObjectInZone.Interact(Entity);
             }
         }
     }

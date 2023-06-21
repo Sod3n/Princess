@@ -9,17 +9,21 @@ using UnityEngine;
 
 namespace Assets.Project2DExample.World.Components
 {
-    public class SkillsManager : MonoBehaviour
+    public class SkillsManager : EntityComponent
     {
-        [SerializeField] private Entity _entity;
+        public override Type[] Dependencies { get; set; } =
+        {
+            typeof(EntityInformation),
+        };
+
         [SerializeField] private Skill[] _skills = new Skill[4];
 
         private void Update()
         {
             for (int i = 0; i < _skills.Length; i++)
             {
-                if (_entity.ControllsSelector.Controlls.Skills.Count <= i) break;
-                if(_skills[i] != null && _entity.ControllsSelector.Controlls.Skills[i])
+                if (Entity.ControllsSelector.Controlls.Skills.Count <= i) break;
+                if(_skills[i] != null && Entity.ControllsSelector.Controlls.Skills[i])
                     _skills[i].TryActivate();
             }
 
@@ -28,11 +32,11 @@ namespace Assets.Project2DExample.World.Components
             {
                 if(_skills[i] == null || Mathf.Ceil(_skills[i].RemainCooldown) <= 0)
                 {
-                    _entity.EntityInformation.SkillsCooldown[i].text = "";
+                    Entity.GetEntityComponent<EntityInformation>().SkillsCooldown[i].text = "";
                 }
                 else
                 {
-                    _entity.EntityInformation.SkillsCooldown[i].text = Mathf.Ceil(_skills[i].RemainCooldown).ToString();
+                    Entity.GetEntityComponent<EntityInformation>().SkillsCooldown[i].text = Mathf.Ceil(_skills[i].RemainCooldown).ToString();
                 }
             }
         }

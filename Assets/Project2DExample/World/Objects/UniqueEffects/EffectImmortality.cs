@@ -24,7 +24,7 @@ namespace Assets.Project2DExample.World.Objects.UniqueEffects
             {
                 Remove();
                 _entity = value;
-                if (_entity != null && _entity.Rigidbody2DMover != null)
+                if (_entity != null)
                     _entity.OnDamageReceive += SetDamageValueToZero;
             }
         }

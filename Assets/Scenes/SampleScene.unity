@@ -931,11 +931,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 574158590}
+  - {fileID: 452736421}
   - {fileID: 933964479}
   - {fileID: 1474919802}
   - {fileID: 1403383964}
-  - {fileID: 452736421}
   - {fileID: 1770670003}
   - {fileID: 1761074273}
   m_Father: {fileID: 2069474799}
@@ -1020,7 +1019,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b3cc42e85bec54c9d061def4018024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 355574468}
   _baseMoveSpeed: 5
   _baseHP: 10
   _baseMaxHP: 10
@@ -1039,7 +1037,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 355574450}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4d4f7e126ab7347baed66602eede07, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bf5c713e2687454a96a427d933ea2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 1
@@ -1052,8 +1050,14 @@ MonoBehaviour:
   _attackMaker: {fileID: 1474919801}
   _flipper: {fileID: 452736422}
   _entityInformation: {fileID: 1963958592}
-  _currencies:
-    _gold: 0
+  _entityComponents:
+  - {fileID: 355574462}
+  - {fileID: 1474919801}
+  - {fileID: 1403383966}
+  - {fileID: 1770670004}
+  - {fileID: 1761074274}
+  - {fileID: 452736422}
+  - {fileID: 933964481}
 --- !u!1 &367164467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,13 +1260,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 452736420}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 355574453}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &452736422
 MonoBehaviour:
@@ -1276,7 +1280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b291d77054adeb418db96699bf6ee7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 355574468}
   _flipTime: 0.6
 --- !u!1 &519420028
 GameObject:
@@ -1408,7 +1411,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 355574453}
+  m_Father: {fileID: 1474919802}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &574158591
@@ -1630,6 +1633,12 @@ MonoBehaviour:
   _attackMaker: {fileID: 808993872}
   _flipper: {fileID: 808993871}
   _entityInformation: {fileID: 185710256}
+  _entityComponents:
+  - {fileID: 808993871}
+  - {fileID: 808993876}
+  - {fileID: 808993875}
+  - {fileID: 808993872}
+  - {fileID: 185710256}
 --- !u!61 &808993869
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1720,7 +1729,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b291d77054adeb418db96699bf6ee7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 808993868}
   _flipTime: 0
 --- !u!114 &808993872
 MonoBehaviour:
@@ -1734,7 +1742,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0516d459aa474a1479bbe4cd7aa7da36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 808993868}
   _attacks: []
   _damageZone: {fileID: 0}
 --- !u!95 &808993873
@@ -1790,7 +1797,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154565d79d8c74b409116467b101e10f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 808993868}
 --- !u!114 &808993876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1803,7 +1809,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b3cc42e85bec54c9d061def4018024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 808993868}
   _baseMoveSpeed: 0
   _baseHP: 10
   _baseMaxHP: 10
@@ -2223,7 +2228,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933964478}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2264,7 +2269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb3a86cb74866f47b87361fe53baf19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 355574468}
 --- !u!61 &933964482
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4027,7 +4031,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fc84664e93f8f34593a1d09e7854e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 355574468}
   _skills:
   - {fileID: 1403383965}
   - {fileID: 0}
@@ -4253,7 +4256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0516d459aa474a1479bbe4cd7aa7da36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 355574468}
   _attacks:
   - _id: 1
     _previousAttackId: 0
@@ -4272,11 +4274,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474919800}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 574158590}
   m_Father: {fileID: 355574453}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4865,7 +4868,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 355574453}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1761074274
 MonoBehaviour:
@@ -4879,7 +4882,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1af9e935d2da0944b2d9310cc2d8d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 355574468}
   _mainMenu: {fileID: 0}
 --- !u!1 &1770670002
 GameObject:
@@ -4911,7 +4913,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 355574453}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1770670004
 MonoBehaviour:
@@ -4925,7 +4927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154565d79d8c74b409116467b101e10f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 355574468}
 --- !u!1 &1773135177
 GameObject:
   m_ObjectHideFlags: 0

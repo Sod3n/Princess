@@ -7,14 +7,13 @@ using UnityEngine;
 
 namespace Assets.Project2DExample.World.Components
 {
-    public class UIMenusCaller : MonoBehaviour
+    public class UIMenusCaller : EntityComponent
     {
-        [SerializeField] Entity _entity;
         [SerializeField] GameObject _mainMenu;
 
         private void Update()
         {
-            if (_entity.ControllsSelector.Controlls.OpenMainMenu)
+            if (Entity.ControllsSelector.Controlls.OpenMainMenu)
             {
                 _mainMenu.SetActive(!_mainMenu.activeInHierarchy);
             }

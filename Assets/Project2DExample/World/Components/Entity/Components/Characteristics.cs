@@ -9,23 +9,15 @@ using UnityEngine;
 namespace Assets.Project2DExample.World.Objects
 {
     [Serializable]
-    public class Characteristics : MonoBehaviour
+    public class Characteristics : EntityComponent
     {
-        [SerializeField] private Entity _entity;
-        public Entity Entity
-        {
-            get
-            {
-                return _entity;
-            }
-            set
-            {
-                _entity = value;
-            }
-        }
-
         [Header("Mover Settings")]
         [SerializeField] protected float _baseMoveSpeed;
+        public float BaseMoveSpeed
+        {
+            get => _baseMoveSpeed;
+            set => _baseMoveSpeed = value;
+        }
         public float MoveSpeed
         {
             get
@@ -39,24 +31,40 @@ namespace Assets.Project2DExample.World.Objects
                     return moveSpeed;
                 return 0;
             }
-            set
-            {
-                _baseMoveSpeed = value;
-            }
         }
 
 
         [Header("Mortality Settings")]
         [SerializeField] protected float _baseHP;
+        public float BaseHP
+        {
+            get => _baseHP;
+            set => _baseHP = value;
+        }
+
         public float HP
         {
             get
             {
-                return _baseHP + OverHP;
+                float hp = _baseHP;
+                foreach (CharacteristicsEffect effect in Entity.CharacteristicsEffects)
+                {
+                    hp += effect.CharacteristicsScales.HP * _baseMoveSpeed + effect.FlatCharacteristics.HP;
+                }
+                if (hp >= MaxHP)
+                    return MaxHP;
+
+                return hp;
+            }
+        }
+        public float TotalHP
+        {
+            get
+            {
+                return HP + OverHP;
             }
             set
             {
-
                 if (HP < value)
                 {
                     _baseHP = value - OverHP;
@@ -67,49 +75,67 @@ namespace Assets.Project2DExample.World.Objects
                 }
                 else if (HP > value)
                 {
-                    OverHP = OverHP - (HP - value);
+                    BaseOverHP = OverHP - (HP - value);
                     if (OverHP < 0)
                     {
                         _baseHP += OverHP;
-                        OverHP = 0;
+                        BaseOverHP = 0;
                     }
                 }
             }
         }
         [SerializeField] protected float _baseMaxHP;
+        public float BaseMaxHP
+        {
+            get => _baseMaxHP;
+            set => _baseMaxHP = value;
+        }
         public float MaxHP
         {
             get
             {
-                return _baseMaxHP;
-            }
-            set
-            {
-                _baseMaxHP = value;
+                float maxHP = _baseMaxHP;
+                foreach (CharacteristicsEffect effect in Entity.CharacteristicsEffects)
+                {
+                    maxHP += effect.CharacteristicsScales.MaxHP * _baseMoveSpeed + effect.FlatCharacteristics.MaxHP;
+                }
+                return maxHP;
             }
         }
         [SerializeField] protected float _baseOverHP;
+        public float BaseOverHP
+        {
+            get => _baseOverHP;
+            set => _baseOverHP = value;
+        }
         public float OverHP
         {
             get
             {
-                return _baseOverHP;
-            }
-            set
-            {
-                _baseOverHP = value;
+                float overHP = _baseOverHP;
+                foreach (CharacteristicsEffect effect in Entity.CharacteristicsEffects)
+                {
+                    overHP += effect.CharacteristicsScales.OverHP * _baseMoveSpeed + effect.FlatCharacteristics.OverHP;
+                }
+                return overHP;
             }
         }
         [SerializeField] protected float _immortalTimeAfterGetDamage = 0;
+        public float BaseImmortalTimeAfterGetDamage
+        {
+            get => _immortalTimeAfterGetDamage;
+            set => _immortalTimeAfterGetDamage = value;
+        }
         public float ImmortalTimeAfterGetDamage
         {
             get
             {
-                return _immortalTimeAfterGetDamage;
-            }
-            set
-            {
-                _immortalTimeAfterGetDamage = value;
+                float immortal = _immortalTimeAfterGetDamage;
+                foreach (CharacteristicsEffect effect in Entity.CharacteristicsEffects)
+                {
+                    immortal += effect.CharacteristicsScales.ImmortalTimeAfterGetDamage * _baseMoveSpeed + effect.FlatCharacteristics.ImmortalTimeAfterGetDamage;
+                }
+                return immortal;
             }
         }
 

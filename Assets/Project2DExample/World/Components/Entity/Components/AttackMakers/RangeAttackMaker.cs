@@ -11,18 +11,24 @@ namespace Assets.Project2DExample.World.Components
 {
     public class RangeAttackMaker : AttackMaker
     {
+        public override Type[] Dependencies { get; set; } =
+        {
+            typeof(Rigidbody2DMover),
+        };
+
         [SerializeField] Projectile ProjectilePrefab;
         [SerializeField] GameObject ProjectileHeap;
+
         protected override void MakeAttack(Attack attack)
         {
-            _entity.Animator.SetInteger("Attack", attack.Id);
-            _entity.AddUniqueEffectOnTime(new EffectStun(_entity), attack.WeeknessTime);
-            Damage damage = new Damage(attack.DamageType, _entity.Characteristics.Attack * attack.Multiplier, new Vector2());
+            Entity.Animator.SetInteger("Attack", attack.Id);
+            Entity.AddUniqueEffectOnTime(new EffectStun(Entity), attack.WeeknessTime);
+            Damage damage = new Damage(attack.DamageType, Entity.Characteristics.Attack * attack.Multiplier, new Vector2());
             ProjectilePrefab.DamageZone.Damage = damage;
             ProjectilePrefab.DamageZone.gameObject.SetActive(true);
             ProjectilePrefab.Rigidbody2D.AddForce(_cursorDirection * attack.DamagePushForce, ForceMode2D.Force);
-            _entity.Rigidbody2DMover.StopMove();
-            _entity.Rigidbody2D.AddForce(_cursorDirection * attack.AttakerPushForce, ForceMode2D.Force);
+            Entity.GetEntityComponent<Rigidbody2DMover>().StopMove();
+            Entity.Rigidbody2D.AddForce(_cursorDirection * attack.AttakerPushForce, ForceMode2D.Force);
         }
     }
 }
