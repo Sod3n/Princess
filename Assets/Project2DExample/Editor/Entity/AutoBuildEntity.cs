@@ -1,4 +1,6 @@
 using Assets.Project2DExample.World.Components;
+using EntitySystem.Abstract;
+using EntitySystem.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -58,7 +60,7 @@ public static class AutoBuildEntity
             {
                 if (!attachedComponentsTypes.Contains(d))
                 {
-                    Debug.LogError(entityComponent.GetType() + " needs " + d.ToString() + " to work properly!");
+                    Debug.LogError(entityComponent.GetType() + " at " + entityComponent.Entity.gameObject.name + " needs " + d.ToString() + " to work properly!", entityComponent.Entity.gameObject);
                 }
             }
     }
@@ -67,10 +69,13 @@ public static class AutoBuildEntity
         if (!entity.EntityComponents.Contains(entityComponent))
         {
             entity.EntityComponents.Add(entityComponent);
-            entityComponent.Entity = entity;
             EditorUtility.SetDirty(entity.gameObject);
-            EditorUtility.SetDirty(entityComponent.gameObject);
             Debug.Log(entityComponent.GetType() + " attached to " + entity.name);
+        }
+        if (!entityComponent.Entity)
+        {
+            entityComponent.Entity = entity;
+            EditorUtility.SetDirty(entityComponent.gameObject);
         }
     }
     static List<Type> GetTypesOfEntityComponents(List<EntityComponent> components)

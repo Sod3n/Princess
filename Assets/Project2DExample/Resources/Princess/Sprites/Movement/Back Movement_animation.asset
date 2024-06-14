@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f1da0b6abdb7d45aa4315eccab639b, type: 3}
+  m_Name: Back Movement_animation
+  m_EditorClassIdentifier: 
+  cels:
+  - sprite: {fileID: 1686519843, guid: 16c2f99ffc398244c8bd381c525a2fd7, type: 3}
+    drivers:
+      keys: []
+      values: 
+  - sprite: {fileID: -1520628912, guid: 16c2f99ffc398244c8bd381c525a2fd7, type: 3}
+    drivers:
+      keys: []
+      values: 
+  - sprite: {fileID: 1054682960, guid: 16c2f99ffc398244c8bd381c525a2fd7, type: 3}
+    drivers:
+      keys: []
+      values: 
+  - sprite: {fileID: 760093559, guid: 16c2f99ffc398244c8bd381c525a2fd7, type: 3}
+    drivers:
+      keys: []
+      values: 
+  - sprite: {fileID: -1118456735, guid: 16c2f99ffc398244c8bd381c525a2fd7, type: 3}
+    drivers:
+      keys: []
+      values: 
+  - sprite: {fileID: -755490185, guid: 16c2f99ffc398244c8bd381c525a2fd7, type: 3}
+    drivers:
+      keys: []
+      values: 
+  controlDriver:
+    name: 
+    autoIncrement: 0
+    percentageBased: 0
+    guid: 44c1db30-58db-4976-8af3-954aa59c6a4c
+  drivers:
+    keys: []
+    values: 
